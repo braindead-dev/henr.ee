@@ -32,6 +32,11 @@ module.exports = merge(
                 watch: true,
                 directory: path.join(__dirname, '../static')
             },
+            historyApiFallback: {
+                rewrites: [
+                    { from: /^\/vsco$/, to: '/vsco.html' },
+                ],
+            },
             client:
             {
                 logging: 'none',
