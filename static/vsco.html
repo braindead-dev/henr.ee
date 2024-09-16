@@ -66,14 +66,16 @@
     }
 
     .gallery {
-      column-count: 2;
-      column-gap: 15px;
+      display: flex;
       padding: 15px;
+      gap: 15px;
     }
 
-    .gallery-item {
-      break-inside: avoid;
-      margin-bottom: 15px;
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
 
     .gallery-item img {
@@ -226,32 +228,47 @@
 
     // Function to dynamically load images
     (function () {
-      const gallery = document.querySelector('.gallery');
-      let imageIndex = 1;
+  const column1 = document.getElementById('column1');
+  const column2 = document.getElementById('column2');
+  let imageIndex = 1;
 
-      function loadImage(index) {
-        const imgSrc = `./vsco_images/image${index}.jpg`;
-        const img = new Image();
-        img.src = imgSrc;
+  let columnHeights = [0, 0]; // Index 0 for column1, index 1 for column2
 
-        img.onload = function () {
-          const galleryItem = document.createElement('div');
-          galleryItem.className = 'gallery-item';
-          galleryItem.appendChild(img);
-          gallery.appendChild(galleryItem);
+  function loadImage(index) {
+    const imgSrc = `./vsco_images/image${index}.jpg`;
+    const img = new Image();
+    img.src = imgSrc;
 
-          // Load the next image
-          loadImage(index + 1);
-        };
+    img.onload = function () {
+      const galleryItem = document.createElement('div');
+      galleryItem.className = 'gallery-item';
+      galleryItem.appendChild(img);
 
-        img.onerror = function () {
-          // Image doesn't exist; stop loading further images
-        };
-      }
+      // Get the aspect ratio to estimate height
+      const aspectRatio = img.naturalHeight / img.naturalWidth;
 
-      // Start loading images from image1.jpg
-      loadImage(imageIndex);
-    })();
+      // Determine which column has less total height
+      const columnIndex = columnHeights[0] <= columnHeights[1] ? 0 : 1;
+      const column = columnIndex === 0 ? column1 : column2;
+
+      column.appendChild(galleryItem);
+
+      // Update the total height of the column
+      columnHeights[columnIndex] += aspectRatio;
+
+      // Load the next image
+      loadImage(index + 1);
+    };
+
+    img.onerror = function () {
+      // Image doesn't exist; stop loading further images
+    };
+  }
+
+  // Start loading images from image1.jpg
+  loadImage(imageIndex);
+})();
+
   </script>
 
 </body>
