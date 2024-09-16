@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/vsco",
+        "destination": "/vsco.html"
+      }
+    ]
+  }
+  
