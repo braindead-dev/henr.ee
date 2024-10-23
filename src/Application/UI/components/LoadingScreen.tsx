@@ -158,7 +158,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                         </div>
                         <div style={styles.headerInfo}>
                             <p>Released: 01/01/2006</p>
-                            <p>HHBIOS (C)2006 Wang Henry Inc.,</p>
+                            <p>HWBIOS (C)2006 Wang Henry Inc.,</p>
                         </div>
                     </div>
                     <div style={styles.body} className="loading-screen-body">
@@ -195,7 +195,7 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                             <p>
                                 All Content Loaded, launching{' '}
                                 <b style={styles.green}>
-                                    'Henry Wang Portfolio Showcase'
+                                    'Henry Wang's Beautiful Hompepage'
                                 </b>{' '}
                                 V1.0
                             </p>
@@ -221,13 +221,13 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                 })}
             >
                 <div style={styles.startPopup}>
-                    {/* <p style={styles.red}>
+                    <p style={styles.red}>
                         <b>THIS SITE IS CURRENTLY A W.I.P.</b>
                     </p>
-                    <p>But do enjoy what I have done so far :)</p>
+                    <p>Massive credit to Heffernan for the site's framework</p>
                     <div style={styles.spacer} />
-                    <div style={styles.spacer} /> */}
-                    <p>Henry Wang Portfolio Showcase 2024</p>
+                    <div style={styles.spacer} /> 
+                    <p>Henry Wang's Personal Homepage</p>
                     {mobileWarning && (
                         <>
                             <br />
