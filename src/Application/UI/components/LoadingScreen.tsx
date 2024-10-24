@@ -221,12 +221,12 @@ const LoadingScreen: React.FC<LoadingProps> = () => {
                 })}
             >
                 <div style={styles.startPopup}>
-                    <p style={styles.red}>
+                    {/* <p style={styles.red}>
                         <b>THIS SITE IS CURRENTLY A W.I.P.</b>
                     </p>
                     <p>Massive credit to Heffernan for the site's framework</p>
                     <div style={styles.spacer} />
-                    <div style={styles.spacer} /> 
+                    <div style={styles.spacer} />  */}
                     <p>Henry Wang's Personal Homepage</p>
                     {mobileWarning && (
                         <>
