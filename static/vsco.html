@@ -42,6 +42,32 @@
       padding: 0;
     }
 
+    /* Desktop sidebar */
+    .sidebar {
+      display: none;
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 180px;
+      height: 100vh;
+      background-color: #000;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      margin-bottom: 40px;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px 0;
+      font-size: 16px;
+    }
+
+    /* Mobile header */
     .header {
       background-color: #000;
       color: #fff;
@@ -66,16 +92,14 @@
     }
 
     .gallery {
-      display: flex;
+      column-count: 2;
+      column-gap: 15px;
       padding: 15px;
-      gap: 15px;
     }
 
-    .column {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 15px;
     }
 
     .gallery-item img {
@@ -99,14 +123,13 @@
       font-family: 'Roboto', sans-serif;
     }
 
-    /* Full-width dropdown menu styles */
     .dropdown-menu {
       display: none;
       background-color: #000;
       color: #fff;
       width: 100%;
       position: absolute;
-      top: 45px; /* Adjust based on your header height */
+      top: 45px;
       left: 0;
       padding: 20px 0;
       text-align: left;
@@ -125,62 +148,77 @@
       background-color: #444;
     }
 
-    /* Show the dropdown when toggled */
     .dropdown.active .dropdown-menu {
       display: block;
     }
 
-    /* Menu icon */
     .menu-icon {
       cursor: pointer;
     }
 
-    #desktop-message {
-      display: flex;
-      visibility: hidden; 
-      text-align: center;
-      padding: 20px;
-      font-size: 20px;
-      color: black;
-      background-color: white;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
+    /* Desktop styles */
+    @media (min-width: 768px) {
+      .header {
+        display: none;
+      }
+
+      .sidebar {
+        display: block;
+      }
+
+      .main-content {
+        margin-left: 220px;
+      }
+
+      .gallery {
+        column-count: 3;
+        padding: 30px;
+      }
     }
 
-    .logo {
-      margin-top: 2px;
-      margin-left: 15px;
+    /* Large desktop styles */
+    @media (min-width: 1200px) {
+      .gallery {
+        column-count: 4;
+      }
     }
 
-    .menu-icon {
-      margin-top: 2px;
-      margin-right: 15px;
+    /* Small desktop/tablet styles */
+    @media (max-width: 1024px) and (min-width: 768px) {
+      .gallery {
+        column-count: 3;
+      }
     }
 
+    /* Mobile styles */
+    @media (max-width: 767px) {
+      .gallery {
+        column-count: 2;
+      }
+    }
   </style>
-
 </head>
 
 <body>
+  <!-- Desktop Sidebar -->
+  <div class="sidebar">
+    <div class="logo">
+      <a href="/">
+        <img src="./vsco_images/icon.png" alt="Logo" width="32" height="32">
+      </a>
+    </div>
+    <a href="https://github.com/braindead-dev/VSCO-gallery-clone/">github project</a>
+    <a href="https://vsco.co/henry00c/gallery">visit VSCO profile</a>
+  </div>
 
-  <div id="desktop-message">This site is currently only viewable on mobile. Redirecting to henr.ee</div>
-
+  <!-- Mobile Header -->
   <div class="header">
     <div class="logo">
-      <a href="https://henr.ee">
+      <a href="/">
         <img src="./vsco_images/icon.png" alt="Logo" width="32" height="32">
       </a>
     </div>
 
-    <!-- Dropdown Menu -->
     <div class="dropdown">
       <div class="menu-icon" onclick="toggleMenu()">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -191,46 +229,29 @@
 
       <div class="dropdown-menu">
         <a href="https://github.com/braindead-dev/VSCO-gallery-clone/">github project</a>
-        <a href="https://henr.ee">main site</a>
-        <a href="https://henrywa.ng">henrywa.ng</a>
         <a href="https://vsco.co/henry00c/gallery">visit VSCO profile</a>
       </div>
     </div>
   </div>
 
-  <div class="profile" style="text-decoration: none; color: inherit;">
-    <img src="./vsco_images/avatar.jpg" alt="Profile Picture" class="profile-pic">
-    <a href="https://vsco.co/henry00c/gallery" style="text-decoration: none;">
-      <h2>henry</h2>
-    </a>
+  <div class="main-content">
+    <div class="profile">
+      <img src="./vsco_images/avatar.jpg" alt="Profile Picture" class="profile-pic">
+      <a href="https://vsco.co/henry00c/gallery" style="text-decoration: none;">
+        <h2>henry</h2>
+      </a>
+      <a href="https://vsco.co/henry00c/gallery" style="text-decoration: none;">
+        <p>henry00c</p>
+      </a>
+    </div>
 
-    <a href="https://vsco.co/henry00c/gallery" style="text-decoration: none;">
-      <p>henry00c</p>
-    </a>
-  </div>
-
-  <div class="gallery">
-    <div class="column" id="column1"></div>
-    <div class="column" id="column2"></div>
+    <div class="gallery">
+      <div class="column" id="column1"></div>
+      <div class="column" id="column2"></div>
+    </div>
   </div>
 
   <script>
-    // Function to detect if the device is desktop
-        function isDesktop() {
-      return window.innerWidth > 768; // Example: screens larger than 768px width are considered desktop
-    }
-
-    // If on desktop, show message and redirect after 5 seconds
-    if (isDesktop()) {
-      document.getElementById('desktop-message').style.visibility = 'visible';
-
-      // Redirect after 5 seconds
-      setTimeout(function() {
-        window.location.href = 'https://henr.ee';
-      }, 5000);
-    }
-
-
     function toggleMenu() {
       const dropdown = document.querySelector('.dropdown');
       dropdown.classList.toggle('active');
@@ -238,11 +259,8 @@
 
     // Function to dynamically load images
     (function () {
-      const column1 = document.getElementById('column1');
-      const column2 = document.getElementById('column2');
+      const gallery = document.querySelector('.gallery');
       let imageIndex = 1;
-
-      let columnHeights = [0, 0]; // Index 0 for column1, index 1 for column2
 
       function loadImage(index) {
         const imgSrc = `./vsco_images/image${index}.jpg`;
@@ -253,18 +271,7 @@
           const galleryItem = document.createElement('div');
           galleryItem.className = 'gallery-item';
           galleryItem.appendChild(img);
-
-          // Get the aspect ratio to estimate height
-          const aspectRatio = img.naturalHeight / img.naturalWidth;
-
-          // Determine which column has less total height
-          const columnIndex = columnHeights[0] <= columnHeights[1] ? 0 : 1;
-          const column = columnIndex === 0 ? column1 : column2;
-
-          column.appendChild(galleryItem);
-
-          // Update the total height of the column
-          columnHeights[columnIndex] += aspectRatio;
+          gallery.appendChild(galleryItem);
 
           // Load the next image
           loadImage(index + 1);
@@ -277,10 +284,8 @@
 
       // Start loading images from image1.jpg
       loadImage(imageIndex);
-      })();
-
+    })();
   </script>
-
 </body>
 
 </html>
